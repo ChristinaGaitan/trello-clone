@@ -6,7 +6,7 @@ type NewItemFormProps = {
     onAdd(text: string): void
 }
 
-export const NewItemForm = ({onAdd}: NewItemFormProps) => {
+export const NewItemForm = ({ onAdd }: NewItemFormProps) => {
     const [text, setText] = useState("");
     const inputRef = useFocus();
 
