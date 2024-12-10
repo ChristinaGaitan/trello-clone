@@ -12,5 +12,7 @@ export const useItemDrag = (item: DragItem) => {
             return item;
         },
         end: () => dispatch(setDraggedItem(null))
-    })
+    });
+
+    return { drag };
 }
