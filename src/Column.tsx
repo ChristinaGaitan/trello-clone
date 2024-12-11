@@ -27,7 +27,7 @@ export const Column = ({ text, id, isPreview }: ColumnProps) => {
             if (!draggedItem) {
                 return;
             }
-            if(draggedItem.type === "COLUMN") {
+            if (draggedItem.type === "COLUMN") {
                 if (draggedItem.id === id) {
                     return;
                 }
@@ -40,7 +40,7 @@ export const Column = ({ text, id, isPreview }: ColumnProps) => {
     drag(drop(ref));
 
     return (
-        <ColumnContainer isPreview={isPreview} ref={ref} isHidden={isHidden(draggedItem, "COLUMN", id)}>
+        <ColumnContainer isPreview={isPreview} ref={ref} isHidden={isHidden(draggedItem, "COLUMN", id, isPreview)} >
             <ColumnTitle>{text}</ColumnTitle>
             {tasks.map((task) => (
                 <Card text={task.text} key={task.id} id={task.id} />
