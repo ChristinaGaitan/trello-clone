@@ -56,5 +56,45 @@ export const appStateReducer = (
 
             break;
         }
+        case "MOVE_TASK": {
+            const {
+                draggedItemId,
+                hoverItemId,
+                sourceColumnId,
+                targetColumnId
+            } = action.payload;
+
+            const sourceListIndex = findItemIndexById(
+                draft.lists,
+                sourceColumnId
+            );
+
+            const targetListIndex = findItemIndexById(
+                draft.lists,
+                targetColumnId
+            );
+
+            const dragIndex = findItemIndexById(
+                draft.lists[sourceListIndex].tasks,
+                draggedItemId
+            );
+
+            const hoverIndex = hoverItemId
+            ? findItemIndexById(
+                draft.lists[targetListIndex].tasks,
+                hoverItemId
+            )
+            : 0
+
+            const item = draft.lists[sourceListIndex].tasks[dragIndex];
+
+            // Remove card from the source column
+            draft.lists[sourceListIndex].tasks.splice(dragIndex, 1);
+
+            // Add card to the target list
+            draft.lists[targetListIndex].tasks.splice(hoverIndex, 0, item);
+            
+            break;
+        }
     }
 }
