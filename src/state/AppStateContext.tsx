@@ -4,11 +4,13 @@ import {
   FC,
   PropsWithChildren,
   Dispatch,
+  useEffect,
 } from "react";
 import { appStateReducer, AppState, List, Task } from "./appStateReducer";
 import { Action } from "./actions";
 import { useImmerReducer } from "use-immer";
 import { DragItem } from "../DragItem";
+import { save } from "../api";
 
 const appData: AppState = {
   draggedItem: null,
@@ -49,6 +51,10 @@ export const AppStateProvider: FC<PropsWithChildren> = ({ children }) => {
   const getTasksByListId = (id: string) => {
     return lists.find((list) => list.id === id)?.tasks || [];
   };
+
+  useEffect(() => {
+    save(state);
+  }, [state]);
 
   return (
     <AppSateContext.Provider
